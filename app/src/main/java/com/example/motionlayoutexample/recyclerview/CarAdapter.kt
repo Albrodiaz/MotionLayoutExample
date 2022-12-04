@@ -9,7 +9,7 @@ import com.example.motionlayoutexample.R
 class CarAdapter(
     private var carList: List<Car>,
     private val onCarClick: (Car) -> Unit,
-    private val onCarDelete: (Int) -> Unit
+    private val onCarDelete: (Car) -> Unit
 ) : RecyclerView.Adapter<CarViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

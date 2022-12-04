@@ -44,8 +44,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Item pulsado: ${car.brand} ${car.model}", Toast.LENGTH_SHORT).show()
     }
 
-    private fun carDelete(position: Int) {
-        carList.removeAt(position)
-        adapter.notifyItemRemoved(position)
+    private fun carDelete(car: Car) {
+        Toast.makeText(this, "Item borrado: ${car.brand} ${car.model}", Toast.LENGTH_SHORT).show()
     }
 }
