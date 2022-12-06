@@ -1,7 +1,6 @@
 package com.example.motionlayoutexample
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.motionlayoutexample.databinding.ActivityMainBinding
@@ -17,34 +16,34 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        carFilter()
         initRecylcer()
-        filteredList()
     }
 
     private fun initRecylcer() {
         adapter = CarAdapter(
             carList = carList,
-            onCarClick = { car -> carSelected(car) },
+            onCarClick = { car -> showCar(car) },
             onCarDelete = { deleted -> carDelete(deleted) })
         binding.mainRecycler.adapter = adapter
     }
 
-    private fun filteredList() {
-        binding.filterText.addTextChangedListener { filter ->
-            val filteredList = carList.filter { car ->
-                car.brand.toString().lowercase().contains(filter.toString().lowercase()) ||
-                        car.model.toString().lowercase().contains(filter.toString().lowercase())
-            }
-            adapter.updateCarList(filteredList)
-            adapter.notifyDataSetChanged()
+    private fun showCar(car: Car) {
+        CarDetailFragment.inflateDetails(car)
+            .show(supportFragmentManager, "FragmentTag")
+    }
+
+    private fun carDelete(position: Int) {
+        carList.removeAt(position)
+        adapter.notifyItemRemoved(position)
+    }
+
+    private fun carFilter() {
+        binding.filterText.addTextChangedListener { filterText ->
+            adapter.updateList(carList.filter { car ->
+                car.brand.toString().lowercase()
+                    .contains(filterText.toString().lowercase())
+            })
         }
-    }
-
-    private fun carSelected(car: Car) {
-        Toast.makeText(this, "Item pulsado: ${car.brand} ${car.model}", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun carDelete(car: Car) {
-        Toast.makeText(this, "Item borrado: ${car.brand} ${car.model}", Toast.LENGTH_SHORT).show()
     }
 }

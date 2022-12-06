@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MotionLayoutExample</string>
+    <string name="loremipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum aliquam at magna id rutrum. Mauris et nibh sed risus maximus blandit sed sed elit. Vivamus ornare accumsan mauris eu sodales. Morbi non maximus mauris. Mauris quis libero faucibus, mollis mauris nec, hendrerit risus. Vestibulum varius posuere laoreet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur molestie congue nisl. Nullam tincidunt sapien nisl, sed tempus ante pulvinar a. Integer tempus elit sit amet sapien aliquet consequat.</string>
 </resources>

@@ -9,7 +9,7 @@ import com.example.motionlayoutexample.R
 class CarAdapter(
     private var carList: List<Car>,
     private val onCarClick: (Car) -> Unit,
-    private val onCarDelete: (Car) -> Unit
+    private val onCarDelete: (Int) -> Unit
 ) : RecyclerView.Adapter<CarViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -23,7 +23,9 @@ class CarAdapter(
 
     override fun getItemCount(): Int = carList.size
 
-    fun updateCarList(carList: List<Car>) {
-        this.carList = carList
+    fun updateList(filteredList: List<Car>) {
+        carList = filteredList
+        notifyDataSetChanged()
     }
+
 }
