@@ -40,10 +40,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun carFilter() {
         binding.filterText.addTextChangedListener { filterText ->
-            adapter.updateList(carList.filter { car ->
+            val filteredList = carList.filter { car ->
                 car.brand.toString().lowercase()
                     .contains(filterText.toString().lowercase())
-            })
+            }
+            adapter.updateList(filteredList)
         }
     }
 }

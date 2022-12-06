@@ -15,7 +15,10 @@ class CarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.horsePower.text = "${car.hp} Cv"
         binding.motor.text = "${car.motor} Cc"
         Glide.with(binding.carImage.context).load(car.photo).into(binding.carImage)
-        binding.showIcon.setOnClickListener { onCarClick(car) }
+        binding.showIcon.setOnClickListener {
+            onCarClick(car)
+            binding.MainMotionLayout.transitionToStart()
+        }
         binding.deleteIcon.setOnClickListener { onCarDelete(adapterPosition) }
     }
 }

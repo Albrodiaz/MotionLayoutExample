@@ -15,10 +15,10 @@ class CarDetailFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            car = it.getParcelable(CAR_PARAM)
+        arguments?.let { bundle ->
+            car = bundle.getParcelable(CAR_PARAM)
         }
-        setStyle(STYLE_NORMAL, R.style.Theme_MotionLayoutExample)
+        setStyle(STYLE_NO_FRAME, R.style.Theme_MotionLayoutExample)
     }
 
     override fun onCreateView(
