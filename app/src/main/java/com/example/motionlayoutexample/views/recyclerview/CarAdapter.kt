@@ -1,30 +1,33 @@
-package com.example.motionlayoutexample.recyclerview
+package com.example.motionlayoutexample.views.recyclerview
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.motionlayoutexample.Car
 import com.example.motionlayoutexample.R
+import com.example.motionlayoutexample.domain.Car
+import com.example.motionlayoutexample.utilities.bassicDiffUtil
 
 class CarAdapter(
-    private var carList: List<Car>,
+    var cars: List<Car>,
     private val onCarClick: (Car) -> Unit,
     private val onCarDelete: (Int) -> Unit
 ) : RecyclerView.Adapter<CarViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return CarViewHolder(layoutInflater.inflate(R.layout.item_car, parent, false))
     }
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        val item = carList[position]
+        val item = cars[position]
         holder.render(item, onCarClick, onCarDelete)
     }
 
-    override fun getItemCount(): Int = carList.size
+    override fun getItemCount(): Int = cars.size
 
-    fun updateList(filteredList: List<Car>) {
-        carList = filteredList
+    fun updateList(newList: List<Car>) {
+        cars = newList
         notifyDataSetChanged()
     }
 

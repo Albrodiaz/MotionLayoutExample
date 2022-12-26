@@ -1,4 +1,4 @@
-package com.example.motionlayoutexample
+package com.example.motionlayoutexample.domain
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -9,7 +9,7 @@ data class Car(
     val hp: Int? = null,
     val motor: Int? = null,
     val photo: String? = null
-): Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -23,7 +23,7 @@ data class Car(
         TODO("Not yet implemented")
     }
 
-    override fun writeToParcel(p0: Parcel?, p1: Int) {
+    override fun writeToParcel(dest: Parcel, flags: Int) {
         TODO("Not yet implemented")
     }
 
