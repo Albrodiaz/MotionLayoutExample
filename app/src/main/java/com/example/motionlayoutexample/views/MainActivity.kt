@@ -21,37 +21,42 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        listeners()
         observers()
+        listeners()
     }
 
     private fun observers() {
         carViewModel.carList.observe(this) {
             adapter = CarAdapter(
-                cars = it as MutableList<Car>,
+                cars = it.toMutableList(),
                 onCarClick = { car -> showCar(car) },
-                onCarDelete = { deleted ->
-                    adapter.cars.remove(deleted)
-                    carViewModel.carDelete(deleted)
-                    adapter.updateList(it)
-                }
+                onCarDelete = { deleted -> deleteCar(deleted) }
             )
             binding.mainRecycler.adapter = adapter
-        }
 
-        carViewModel.filteredList.observe(this) {
-            adapter.updateList(it)
         }
     }
 
     private fun listeners() {
         binding.filterText.addTextChangedListener {
-            carViewModel.setFilteredList(it.toString())
+            val filteredList = carViewModel.carList.value!!.filter { car ->
+                car.brand.toString().lowercase().contains(it.toString().lowercase())
+            }
+            adapter.updateList(filteredList)
         }
     }
+
 
     private fun showCar(car: Car) {
         CarDetailFragment.inflateDetails(car)
             .show(supportFragmentManager, "FragmentTag")
     }
+
+    private fun deleteCar(car: Car) {
+        carViewModel.carDelete(car)
+        adapter.cars.drop(1)
+        adapter.updateList(adapter.cars)
+        binding.filterText.setText("")
+    }
+
 }

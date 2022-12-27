@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Car(
+    val id: Int? = null,
     val brand: String? = null,
     val model: String? = null,
     val hp: Int? = null,
@@ -11,6 +12,7 @@ data class Car(
     val photo: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readValue(Int::class.java.classLoader) as? Int,

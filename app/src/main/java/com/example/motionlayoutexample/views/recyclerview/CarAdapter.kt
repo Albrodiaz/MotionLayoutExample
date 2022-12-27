@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.motionlayoutexample.R
 import com.example.motionlayoutexample.domain.Car
 import com.example.motionlayoutexample.utilities.MyDiffUtil
-import com.example.motionlayoutexample.utilities.bassicDiffUtil
 
 class CarAdapter(
-    var cars: MutableList<Car>,
+    var cars: List<Car>,
     private val onCarClick: (Car) -> Unit,
     private val onCarDelete: (Car) -> Unit
 ) : RecyclerView.Adapter<CarViewHolder>() {
