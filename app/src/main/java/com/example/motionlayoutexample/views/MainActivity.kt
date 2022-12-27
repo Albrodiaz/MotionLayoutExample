@@ -26,9 +26,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observers() {
-        carViewModel.carList.observe(this) {
+        carViewModel.carList.observe(this) { cars ->
             adapter = CarAdapter(
-                cars = it.toMutableList(),
+                cars = cars.toMutableList(),
                 onCarClick = { car -> showCar(car) },
                 onCarDelete = { deleted -> deleteCar(deleted) }
             )
@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun listeners() {
-        binding.filterText.addTextChangedListener {
+        binding.filterText.addTextChangedListener { userText ->
             val filteredList = carViewModel.carList.value!!.filter { car ->
-                car.brand.toString().lowercase().contains(it.toString().lowercase())
+                car.brand.toString().lowercase().contains(userText.toString().lowercase())
             }
             adapter.updateList(filteredList)
         }
@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
     private fun deleteCar(car: Car) {
         carViewModel.carDelete(car)
         adapter.cars.drop(1)
-        adapter.updateList(adapter.cars)
         binding.filterText.setText("")
     }
 
