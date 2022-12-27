@@ -1,7 +1,9 @@
 package com.example.motionlayoutexample.utilities
 
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlin.properties.Delegates
 
 fun <VH : RecyclerView.ViewHolder, T> RecyclerView.Adapter<VH>.bassicDiffUtil(
@@ -23,3 +25,7 @@ fun <VH : RecyclerView.ViewHolder, T> RecyclerView.Adapter<VH>.bassicDiffUtil(
         }).dispatchUpdatesTo(this)
 
     }
+
+fun ImageView.loadUrl(url: String) {
+    Glide.with(this).load(url).into(this)
+}

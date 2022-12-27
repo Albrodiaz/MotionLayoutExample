@@ -28,11 +28,12 @@ class MainActivity : AppCompatActivity() {
     private fun observers() {
         carViewModel.carList.observe(this) {
             adapter = CarAdapter(
-                cars = it,
+                cars = it as MutableList<Car>,
                 onCarClick = { car -> showCar(car) },
                 onCarDelete = { deleted ->
+                    adapter.cars.remove(deleted)
                     carViewModel.carDelete(deleted)
-                    adapter.notifyItemRemoved(deleted)
+                    adapter.updateList(it)
                 }
             )
             binding.mainRecycler.adapter = adapter

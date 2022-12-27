@@ -57,7 +57,7 @@ class CarProvider {
 
     fun getCars() = carList
 
-    fun deleteCar(position: Int) {
-        carList.removeAt(position)
+    fun deleteCar(car: Car) {
+        carList.remove(car)
     }
 }

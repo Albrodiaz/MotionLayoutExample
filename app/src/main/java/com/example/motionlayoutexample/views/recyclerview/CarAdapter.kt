@@ -1,17 +1,18 @@
 package com.example.motionlayoutexample.views.recyclerview
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.motionlayoutexample.R
 import com.example.motionlayoutexample.domain.Car
+import com.example.motionlayoutexample.utilities.MyDiffUtil
 import com.example.motionlayoutexample.utilities.bassicDiffUtil
 
 class CarAdapter(
-    var cars: List<Car>,
+    var cars: MutableList<Car>,
     private val onCarClick: (Car) -> Unit,
-    private val onCarDelete: (Int) -> Unit
+    private val onCarDelete: (Car) -> Unit
 ) : RecyclerView.Adapter<CarViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
@@ -27,8 +28,9 @@ class CarAdapter(
     override fun getItemCount(): Int = cars.size
 
     fun updateList(newList: List<Car>) {
-        cars = newList
-        notifyDataSetChanged()
+        val result = DiffUtil.calculateDiff(MyDiffUtil(cars, newList))
+        cars = newList as MutableList<Car>
+        result.dispatchUpdatesTo(this)
     }
 
 }

@@ -21,8 +21,9 @@ class CarViewModel(private val carProvider: CarProvider): ViewModel() {
         _filteredList.value = carProvider.getCars()
     }
 
-    fun carDelete(position: Int) {
-        carProvider.deleteCar(position)
+    fun carDelete(car: Car) {
+        carProvider.deleteCar(car)
+        _carList.value = carProvider.getCars()
     }
 
     fun setFilteredList(userText: String) {
